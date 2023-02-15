@@ -77,7 +77,7 @@ private:
 
     void verifyBlock(int hashVal);
     void addBlock(const BBlock& newBlock);
-    void sendInitRequest();
+    void sendInitRequest(std::string initNode);
     std::string decode_data(std::shared_ptr<const ndn::Data> data);
 };
 }

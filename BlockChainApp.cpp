@@ -133,6 +133,16 @@ void ndnBlockchainApp::verifyBlock(int hashVal) { // DONE
     }
 }
 
+void ndnBlockchainApp::sendInitRequest(std::string initNode) {
+    std::string prefix = "/ndn.blockchain/" + initNode;
+    prefix += "/init";
+
+    auto newinterest = std::make_shared<ndn::Interest>(prefix);
+    newinterest->setNonce(dist(rng));
+    newinterest->setInterestLifetime(ndn::time::seconds(40000));
+    this->SendInterest(newinterest);
+}
+
 void ndnBlockchainApp::addBlock(const BBlock& newBlock) { // DONE
     blockChain.push_back(newBlock);
     trList.clear();
@@ -234,7 +244,19 @@ void ndnBlockchainApp::OnInterest(std::shared_ptr<const ndn::Interest> interest)
 
     while (is >> word) vec.push_back(word);
 
-    if (vec.back() == "init") return;
+    if (vec.back() == "init") {
+        std::string candidates = "";
+
+        auto data = std::make_shared<ndn::Data>(interest->getName());
+        data->setFreshnessPeriod(ndn::time::milliseconds(400000));
+        data->setContent(std::make_shared< ::ndn::Buffer>(candidates.begin(), candidates.end()));
+        ndn::StackHelper::getKeyChain().sign(*data);
+
+        m_transmittedDatas(data, this, m_face);
+        m_appLink->onReceiveData(*data);
+
+        return;
+    }
     else if (vec.back() == "verify") {
         int hashVal = std::stoi(vec[2]);
         this->verifyBlock(hashVal);
@@ -283,6 +305,49 @@ void ndnBlockchainApp::OnInterest(std::shared_ptr<const ndn::Interest> interest)
         newinterest->setInterestLifetime(ndn::time::seconds(40000));
         this->SendInterest(newinterest);
     }
+}
+
+void ndnBlockchainApp::OnData(std::shared_ptr<const ndn::Data> data) {
+    App::OnData(data);
+
+    NS_LOG_FUNCTION(this << data);
+
+    std::string decodedData = decode_data(data), word;
+    std::string dataName;
+    std::stringstream tmpStream;
+    tmpStream << data->getName();
+    tmpStream >> dataName; 
+
+    if (dataName.back() == 't') return;
+
+    std::istringstream is(decodedData);
+    BBlock newBlock;
+
+    is >> word; std::string blockSource = word;
+    newBlock.creator = blockSource;
+
+    is >> word; // sz
+    newBlock.sz = std::stoi(word);
+
+    is >> word;
+    newBlock.hashLast = std::stoi(word);
+
+    is >> word;
+    newBlock.hashThis = std::stoi(word);
+
+    is >> word;
+    newBlock.pow = std::stoi(word);
+
+    for (int i = 0; i < newBlock.sz; i++) {
+        is >> word;
+        newBlock.trSource.push_back(word);
+
+        is >> word;
+        newBlock.trDest.push_back(word);
+    }
+
+    blockStore[newBlock.hashThis] = newBlock;
+    this->verifyBlock(newBlock.hashThis);
 }
 
 void ndnBlockchainApp::NewBlock() {
