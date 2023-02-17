@@ -10,4 +10,15 @@ This research project is a simulation and comparison of various Blockchain appli
 # Usage
 
 ## Installation
-ndnSIM: https://ndnsim.net/current/
+- Install ndnSIM: https://ndnsim.net/current/
+- Clone this repo into ns3/scratch directory
+
+## Compilation
+```
+cd ns3/
+./waf
+```
+
+``` ./waf ``` command builds everything in scratch any time a change occurs.
+
+Use [NetAnim](https://www.nsnam.org/wiki/NetAnim) to view animation by opening animation.xml
