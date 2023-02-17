@@ -1,4 +1,4 @@
-#include "BlockChainApp.hpp"
+#include "ndnBlockchainApp.hpp"
 
 #include "ns3/ptr.h"
 #include "ns3/log.h"
@@ -26,8 +26,7 @@ std::uniform_int_distribution<std::mt19937::result_type> dist(0, std::numeric_li
 
 TypeId ndnBlockchainApp::GetTypeId() {
     auto checker = MakeIntegerChecker<int64_t>();
-    static TypeId tid = TypeId("ns3::ndnBlockchainApp")
-                        .AddConstructor<ndnBlockchainApp>()
+    static TypeId tid = TypeId("ndnBlockchainApp")
                         .SetParent<ndn::App>()
                         .AddAttribute("NodeName", 
                                         "Name of the Node",
@@ -38,7 +37,8 @@ TypeId ndnBlockchainApp::GetTypeId() {
                                         "CS Size", 
                                         IntegerValue((int64_t) 20), 
                                         MakeIntegerAccessor(&ndnBlockchainApp::cssz), 
-                                        checker);
+                                        checker)
+                        .AddConstructor<ndnBlockchainApp>();
 
     return tid;
 }
@@ -48,7 +48,7 @@ void ndnBlockchainApp::StartApplication() {
     blockChain.push_back(originBlock);
     temporaryBlock.hashLast = originBlock.hashThis;
 
-    NS_LOG_INFO("ndnBlockchainApp start: " << nameOfNode);
+    // NS_LOG_INFO("ndnBlockchainApp start: " << nameOfNode);
     ndn::App::StartApplication();
     std::string route = "/ndn.blockchain";
     ndn::FibHelper::AddRoute(GetNode(), route, m_face, 0);
@@ -66,11 +66,7 @@ void ndnBlockchainApp::SendInterest(std::shared_ptr<const ndn::Interest> interes
     m_appLink->onReceiveInterest(*interest);
 }
 
-void ndnBlockchainApp::OnInterest(std::shared_ptr<const ndn::Interest> interest) {
-    ndn::App::OnInterest(interest);
-}
-
-std::string decode_data(std::shared_ptr<const ns3::ndn::Data> data) {
+std::string ndnBlockchainApp::decode_data(std::shared_ptr<const ns3::ndn::Data> data) {
     auto& contentBlock = data->getContent();
     std::stringstream ss;
     std::string content, temp;
@@ -99,10 +95,6 @@ std::string decode_data(std::shared_ptr<const ns3::ndn::Data> data) {
     }
 
     return content;
-}
-
-void ndnBlockchainApp::OnData(std::shared_ptr<const ndn::Data> data) {
-    App::OnData(data);
 }
 
 void ndnBlockchainApp::verifyBlock(int hashVal) { // DONE
@@ -136,6 +128,8 @@ void ndnBlockchainApp::verifyBlock(int hashVal) { // DONE
 void ndnBlockchainApp::sendInitRequest(std::string initNode) {
     std::string prefix = "/ndn.blockchain/" + initNode;
     prefix += "/init";
+
+    NS_LOG_INFO("Sending init request from " << nameOfNode);
 
     auto newinterest = std::make_shared<ndn::Interest>(prefix);
     newinterest->setNonce(dist(rng));
@@ -237,6 +231,8 @@ void ndnBlockchainApp::OnInterest(std::shared_ptr<const ndn::Interest> interest)
     ss << interest->getName();
     ss >> interestName;
 
+    NS_LOG_INFO("Recieved Interest: " << interestName);
+
     for (char& c : interestName) if (c == '/') c = ' ';
     std::istringstream is(interestName);
     std::string word;
@@ -245,7 +241,7 @@ void ndnBlockchainApp::OnInterest(std::shared_ptr<const ndn::Interest> interest)
     while (is >> word) vec.push_back(word);
 
     if (vec.back() == "init") {
-        std::string candidates = "";
+        std::string candidates = "# Donald Clinton Russel Andrew Smith #";
 
         auto data = std::make_shared<ndn::Data>(interest->getName());
         data->setFreshnessPeriod(ndn::time::milliseconds(400000));
@@ -312,13 +308,16 @@ void ndnBlockchainApp::OnData(std::shared_ptr<const ndn::Data> data) {
 
     NS_LOG_FUNCTION(this << data);
 
-    std::string decodedData = decode_data(data), word;
+    std::string decodedData = this->decode_data(data), word;
     std::string dataName;
     std::stringstream tmpStream;
     tmpStream << data->getName();
     tmpStream >> dataName; 
 
-    if (dataName.back() == 't') return;
+    if (dataName.back() == 't') {
+        NS_LOG_INFO("Recieved candidates list: " << decodedData);
+        return;
+    }
 
     std::istringstream is(decodedData);
     BBlock newBlock;
@@ -370,5 +369,9 @@ void ndnBlockchainApp::NewBlock() {
     blockChain.push_back(temporaryBlock);
 
     this->BroadcastBlockToMiners(temporaryBlock);
+}
+
+void ndnBlockchainApp::printNodeName(std::string prompt) {
+    std::cout << prompt << " " << nameOfNode << std::endl;
 }
 }

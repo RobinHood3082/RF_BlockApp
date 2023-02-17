@@ -1,5 +1,5 @@
-#ifndef BCAPP_HPP
-#define BCAPP_HPP
+#ifndef NDNBCAPP_HPP
+#define NDNBCAPP_HPP
 
 #include "BBlock.hpp"
 #include "ns3/ndnSIM/apps/ndn-app.hpp"
@@ -70,7 +70,7 @@ public:
     void NewBlock();
     void ShowResults();
 
-private:
+// private:
     void BroadcastTransaction(string sender, string reciever);
     void BroadcastBlockToUsers(BBlock block);
     void BroadcastBlockToMiners(BBlock block);
@@ -79,6 +79,7 @@ private:
     void addBlock(const BBlock& newBlock);
     void sendInitRequest(std::string initNode);
     std::string decode_data(std::shared_ptr<const ndn::Data> data);
+    void printNodeName(std::string prompt);
 };
 }
 

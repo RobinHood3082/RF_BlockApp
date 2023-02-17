@@ -1,41 +1,540 @@
-# 
-
 router
-
-# node 	comment	    ypos    xpos
-router1	    NA		2       5
-router2	    NA		2      9
-router3	    NA		2      1
-router4	    NA		5       5
-miner1	    NA		1       7
-miner2	    NA		3      9
-miner3	    NA		3      1
-user1		NA		1       6
-user2		NA		1       4
-user3		NA		1       3
-user4		NA		2      10
-user5		NA		1      9
-user6		NA		2      8
-user7		NA		2      0
-user8		NA		1      1
-user9		NA		2      2
-user0		NA		10	 5
+router-165	NA	0	0
+router-142	NA	0	0
+router-160	NA	0	0
+router-161	NA	0	0
+router-179	NA	0	0
+router-180	NA	0	0
+router-163	NA	0	0
+router-168	NA	0	0
+router-169	NA	0	0
+router-167	NA	0	0
+router-277	NA	0	0
+router-183	NA	0	0
+router-186	NA	0	0
+router-185	NA	0	0
+router-241	NA	0	0
+router-210	NA	0	0
+router-212	NA	0	0
+router-216	NA	0	0
+router-209	NA	0	0
+router-301	NA	0	0
+router-306	NA	0	0
+router-243	NA	0	0
+router-318	NA	0	0
+router-123	NA	0	0
+router-125	NA	0	0
+router-178	NA	0	0
+router-195	NA	0	0
+router-127	NA	0	0
+router-150	NA	0	0
+router-152	NA	0	0
+router-257	NA	0	0
+router-282	NA	0	0
+router-133	NA	0	0
+router-134	NA	0	0
+router-202	NA	0	0
+router-262	NA	0	0
+router-236	NA	0	0
+router-237	NA	0	0
+router-203	NA	0	0
+router-200	NA	0	0
+router-201	NA	0	0
+router-137	NA	0	0
+router-138	NA	0	0
+router-140	NA	0	0
+router-141	NA	0	0
+router-228	NA	0	0
+router-170	NA	0	0
+router-227	NA	0	0
+router-147	NA	0	0
+router-149	NA	0	0
+router-158	NA	0	0
+router-156	NA	0	0
+router-159	NA	0	0
+router-162	NA	0	0
+router-244	NA	0	0
+router-181	NA	0	0
+router-275	NA	0	0
+router-276	NA	0	0
+router-166	NA	0	0
+router-171	NA	0	0
+router-173	NA	0	0
+router-172	NA	0	0
+router-174	NA	0	0
+router-182	NA	0	0
+router-239	NA	0	0
+router-285	NA	0	0
+router-242	NA	0	0
+router-229	NA	0	0
+router-213	NA	0	0
+router-187	NA	0	0
+router-188	NA	0	0
+router-218	NA	0	0
+router-207	NA	0	0
+router-217	NA	0	0
+router-255	NA	0	0
+router-214	NA	0	0
+router-245	NA	0	0
+router-222	NA	0	0
+router-208	NA	0	0
+router-295	NA	0	0
+router-312	NA	0	0
+router-219	NA	0	0
+router-304	NA	0	0
+router-293	NA	0	0
+router-234	NA	0	0
+router-303	NA	0	0
+router-235	NA	0	0
+router-247	NA	0	0
+router-316	NA	0	0
+router-317	NA	0	0
+router-279	NA	0	0
+miner-1	NA	0	0
+miner-2	NA	0	0
+miner-3	NA	0	0
+miner-4	NA	0	0
+miner-5	NA	0	0
+miner-6	NA	0	0
+miner-7	NA	0	0
+miner-8	NA	0	0
+miner-9	NA	0	0
+miner-10	NA	0	0
+miner-11	NA	0	0
+miner-12	NA	0	0
+miner-13	NA	0	0
+miner-14	NA	0	0
+miner-15	NA	0	0
+miner-16	NA	0	0
+user-144	NA	0	0
+user-145	NA	0	0
+user-146	NA	0	0
+user-226	NA	0	0
+user-157	NA	0	0
+user-197	NA	0	0
+user-249	NA	0	0
+user-250	NA	0	0
+user-153	NA	0	0
+user-155	NA	0	0
+user-177	NA	0	0
+user-175	NA	0	0
+user-198	NA	0	0
+user-199	NA	0	0
+user-184	NA	0	0
+user-286	NA	0	0
+user-189	NA	0	0
+user-193	NA	0	0
+user-289	NA	0	0
+user-252	NA	0	0
+user-291	NA	0	0
+user-220	NA	0	0
+user-215	NA	0	0
+user-206	NA	0	0
+user-294	NA	0	0
+user-221	NA	0	0
+user-314	NA	0	0
+user-305	NA	0	0
+user-253	NA	0	0
+user-254	NA	0	0
+user-307	NA	0	0
+user-231	NA	0	0
+user-302	NA	0	0
+user-309	NA	0	0
+user-232	NA	0	0
+user-287	NA	0	0
+user-230	NA	0	0
+user-233	NA	0	0
+user-310	NA	0	0
+user-238	NA	0	0
+user-246	NA	0	0
+user-248	NA	0	0
+user-319	NA	0	0
+user-278	NA	0	0
+user-284	NA	0	0
+user-281	NA	0	0
+user-280	NA	0	0
+user-258	NA	0	0
+user-259	NA	0	0
+user-265	NA	0	0
+user-283	NA	0	0
+user-299	NA	0	0
+user-300	NA	0	0
+user-308	NA	0	0
+user-313	NA	0	0
+user-311	NA	0	0
+# link section defines point-to-point links between nodes and characteristics of these links
 
 link
 
-router1	router4	1Mbps 1 200ms
-router2	router4	1Mbps 1 200ms
-router3	router4	1Mbps 1 200ms
-router1 miner1	1Mbps 1 200ms
-router1	user1   1Mbps 1 200ms
-router1	user2   1Mbps 1 200ms
-router1	user3   1Mbps 1 200ms
-router2	miner2	1Mbps 1 200ms
-router2	user4   1Mbps 1 200ms
-router2	user5   1Mbps 1 200ms
-router2	user6   1Mbps 1 200ms
-router3	miner3	1Mbps 1 200ms
-router3	user7   1Mbps 1 200ms
-router3	user8   1Mbps 1 200ms
-router3	user9   1Mbps 1 200ms
-router4 user0   1Mbps 1 200ms
+# Each line should be in the following format (only first two are required, the rest can be omitted)
+# srcNode   dstNode     bandwidth   metric  delay   queue
+# bandwidth: link bandwidth
+# metric: routing metric
+# delay:  link delay
+# queue:  MaxPackets for transmission queue on the link (both directions)
+router-123	miner-1	2670300bps	37	38431us	76	
+router-123	router-125	14111924bps	7	5082us	401	
+router-123	miner-6	1880565bps	53	14931us	54	
+router-123	router-127	16325849bps	6	8114us	464	
+router-123	miner-7	1546222bps	64	62794us	44	
+router-123	router-150	18171854bps	5	8125us	517	
+router-123	miner-8	2710491bps	36	42830us	78	
+router-123	router-152	16826839bps	5	8004us	479	
+miner-1	router-178	2284737bps	43	11073us	65	
+router-125	router-127	18059193bps	5	7899us	514	
+router-125	router-257	19473863bps	5	8078us	554	
+router-125	miner-9	1376487bps	72	15687us	40	
+router-125	router-282	10232595bps	9	8024us	291	
+miner-6	router-127	1120323bps	89	43455us	32	
+miner-6	router-282	1204419bps	83	17627us	35	
+router-127	miner-7	1642752bps	60	19809us	47	
+miner-7	router-257	2152766bps	46	19922us	62	
+miner-10	router-133	2417639bps	41	23314us	69	
+miner-2	router-134	2996520bps	33	29469us	86	
+miner-2	router-202	1879097bps	53	65756us	54	
+miner-2	router-262	1504951bps	66	15501us	43	
+router-133	router-134	15449603bps	6	9796us	439	
+router-133	router-195	17262627bps	5	7736us	491	
+router-133	router-202	13151545bps	7	9979us	374	
+router-133	router-203	12994371bps	7	9285us	370	
+router-133	miner-13	2167249bps	46	63901us	62	
+router-133	router-262	13457588bps	7	9233us	383	
+router-133	miner-14	1660692bps	60	19037us	48	
+router-134	router-236	16005130bps	6	5053us	455	
+router-134	router-237	17851309bps	5	8494us	508	
+router-134	miner-13	2905339bps	34	33050us	83	
+router-134	router-262	14634251bps	6	9983us	416	
+miner-3	router-200	2168130bps	46	15941us	62	
+miner-3	router-201	2635305bps	37	34880us	75	
+router-137	miner-15	2956447bps	33	62701us	84	
+router-137	router-140	16827505bps	5	5119us	479	
+router-137	router-141	10554499bps	9	5953us	300	
+router-137	router-142	13151956bps	7	5820us	374	
+router-137	miner-16	2451947bps	40	41972us	70	
+router-137	user-144	1559852bps	64	48146us	45	
+router-137	router-195	11514474bps	8	9436us	328	
+router-137	router-202	11275207bps	8	5733us	321	
+router-137	router-203	10313961bps	9	6650us	294	
+router-137	router-228	15506935bps	6	5793us	441	
+router-138	router-140	14024357bps	7	8340us	399	
+router-138	router-141	13031174bps	7	5444us	371	
+router-138	router-142	19634963bps	5	9497us	558	
+router-138	miner-16	2920859bps	34	21553us	83	
+router-138	router-228	10904037bps	9	7605us	310	
+miner-15	router-170	1325233bps	75	30349us	38	
+miner-15	router-227	2828449bps	35	29969us	81	
+router-140	user-144	1921858bps	52	19335us	55	
+router-140	user-145	2193595bps	45	50536us	63	
+router-140	user-146	1690485bps	59	34432us	49	
+router-140	router-147	19758027bps	5	5042us	562	
+router-140	router-170	14567456bps	6	5754us	414	
+router-140	user-226	1348199bps	74	37512us	39	
+router-140	router-227	11068776bps	9	8879us	315	
+router-141	user-144	2952357bps	33	69258us	84	
+router-141	user-145	1476233bps	67	35059us	42	
+router-141	user-146	1104335bps	90	51099us	32	
+router-141	router-147	14355781bps	6	5544us	408	
+router-141	router-170	14890604bps	6	6616us	424	
+router-142	router-147	17989237bps	5	7036us	512	
+router-142	router-170	17805425bps	5	6829us	506	
+router-142	router-227	16244761bps	6	8876us	462	
+router-147	miner-4	1281955bps	78	17750us	37	
+router-147	router-165	17742593bps	5	6211us	505	
+router-149	miner-8	2597077bps	38	56986us	74	
+router-149	router-152	19109580bps	5	8415us	543	
+router-149	router-158	11357986bps	8	8824us	323	
+router-149	user-249	1947504bps	51	42434us	56	
+router-149	user-250	2296681bps	43	21735us	66	
+router-150	router-152	17702647bps	5	9686us	503	
+router-150	router-156	10805217bps	9	5869us	307	
+router-150	user-157	1759682bps	56	37428us	50	
+router-150	router-158	13670954bps	7	9702us	389	
+router-150	user-249	1965069bps	50	40202us	56	
+router-150	user-250	1512172bps	66	45621us	43	
+router-152	user-153	1452987bps	68	20063us	42	
+miner-5	router-158	2325792bps	42	50689us	67	
+miner-5	router-159	2966710bps	33	26637us	85	
+miner-5	router-162	1885325bps	53	58723us	54	
+user-155	router-158	2396520bps	41	67190us	69	
+user-155	router-162	2468153bps	40	16307us	71	
+router-156	user-157	1529352bps	65	66436us	44	
+router-156	router-158	10329402bps	9	6224us	294	
+router-156	router-159	18909979bps	5	9799us	538	
+router-156	router-162	15890041bps	6	8273us	452	
+user-157	router-244	2884665bps	34	64839us	82	
+router-158	router-159	18232077bps	5	9982us	518	
+router-158	router-244	13130553bps	7	8274us	374	
+router-159	router-282	17016179bps	5	7162us	484	
+router-160	router-162	16097190bps	6	7680us	458	
+router-160	router-181	15827297bps	6	5170us	450	
+router-160	router-236	13461982bps	7	8872us	383	
+router-160	router-237	10981002bps	9	5415us	312	
+router-160	router-275	15482747bps	6	5624us	440	
+router-160	router-276	17648324bps	5	8152us	502	
+router-161	router-162	19528187bps	5	9109us	555	
+router-161	router-179	46876698bps	2	8060us	1332	
+router-161	router-180	60765600bps	1	5600us	1727	
+router-161	router-181	19411261bps	5	6689us	552	
+router-161	router-236	15389658bps	6	8728us	438	
+router-161	router-237	18167525bps	5	7984us	517	
+router-161	router-275	10418876bps	9	7642us	296	
+router-161	router-276	11302133bps	8	8703us	322	
+router-162	router-168	13880891bps	7	7232us	395	
+router-162	router-169	13376176bps	7	7008us	381	
+router-162	router-275	15234557bps	6	5218us	433	
+router-162	router-276	15975499bps	6	9509us	454	
+router-163	router-168	87240745bps	1	9859us	2479	
+router-163	router-169	55761651bps	1	9139us	1585	
+router-163	router-170	17731529bps	5	5455us	504	
+router-163	router-171	18100240bps	5	6707us	515	
+router-163	router-173	12331710bps	8	9489us	351	
+miner-4	router-166	2818392bps	35	21764us	81	
+router-165	router-167	54405341bps	1	9193us	1546	
+router-165	router-168	91689348bps	1	5460us	2605	
+router-165	router-169	66998292bps	1	9380us	1904	
+router-165	router-171	19115840bps	5	8018us	544	
+router-165	router-277	69367736bps	1	9345us	1971	
+router-166	router-168	16188519bps	6	6078us	460	
+router-166	router-169	12882940bps	7	6633us	366	
+router-166	router-277	18985596bps	5	8819us	540	
+router-167	router-168	46446179bps	2	6919us	1320	
+router-167	router-169	61538482bps	1	7435us	1749	
+router-167	router-170	14123187bps	7	7655us	402	
+router-167	router-171	14739877bps	6	7425us	419	
+router-167	router-275	18382380bps	5	7694us	523	
+router-168	router-170	18092349bps	5	5495us	514	
+router-168	router-172	19622880bps	5	7302us	558	
+router-168	router-174	19931735bps	5	7420us	567	
+router-168	router-236	11666068bps	8	9334us	332	
+router-168	router-237	14602869bps	6	6372us	415	
+router-169	router-172	12761629bps	7	5141us	363	
+router-169	router-173	19870156bps	5	9084us	565	
+router-169	router-174	13096681bps	7	5559us	373	
+router-169	router-236	17718204bps	5	6414us	504	
+router-169	router-237	12416256bps	8	8596us	353	
+router-169	router-277	92350605bps	1	5858us	2624	
+router-170	router-172	12255982bps	8	9534us	349	
+router-170	router-174	17661774bps	5	9037us	502	
+router-170	router-178	12405619bps	8	9915us	353	
+router-170	router-200	11993734bps	8	8727us	341	
+router-171	router-172	19661219bps	5	8436us	559	
+router-171	router-173	16295386bps	6	9076us	463	
+router-171	router-174	13428105bps	7	5831us	382	
+router-171	user-177	1479970bps	67	67432us	43	
+router-171	router-178	18089803bps	5	9517us	514	
+router-171	user-198	1977615bps	50	49791us	57	
+router-171	user-199	2600736bps	38	60575us	74	
+router-171	router-200	18556749bps	5	6911us	528	
+router-171	router-201	13641846bps	7	9878us	388	
+router-171	router-277	17154152bps	5	9360us	488	
+router-172	router-173	17358844bps	5	9541us	494	
+router-172	router-174	13998554bps	7	7172us	398	
+router-172	user-175	1670142bps	59	15909us	48	
+router-173	user-175	1232943bps	81	30170us	36	
+router-174	user-175	1514305bps	66	44278us	44	
+miner-11	router-178	2555019bps	39	52123us	73	
+router-178	router-282	17409118bps	5	8680us	495	
+router-179	router-182	16279638bps	6	8420us	463	
+router-179	router-183	67244210bps	1	6570us	1911	
+router-179	router-186	76222940bps	1	8908us	2166	
+router-179	router-239	16144102bps	6	5631us	459	
+router-180	router-182	15208155bps	6	9452us	433	
+router-180	router-183	40512379bps	2	8181us	1151	
+router-180	router-185	74577101bps	1	8539us	2119	
+router-180	router-186	82223656bps	1	5892us	2336	
+router-180	router-239	14760108bps	6	5078us	420	
+router-180	router-285	12608475bps	7	5689us	359	
+router-181	router-183	17049080bps	5	7423us	485	
+router-181	user-184	2426712bps	41	43373us	69	
+router-181	router-185	16751813bps	5	9800us	476	
+router-181	router-186	13783976bps	7	5804us	392	
+router-181	router-239	11047056bps	9	6366us	314	
+router-182	router-185	19216393bps	5	7973us	546	
+router-182	router-186	16735783bps	5	8501us	476	
+router-182	router-242	19507978bps	5	8256us	555	
+router-182	router-285	16919313bps	5	6658us	481	
+router-182	user-286	1592164bps	62	56426us	46	
+router-183	router-185	92274553bps	1	7128us	2622	
+router-183	router-241	41685268bps	2	5491us	1185	
+router-183	router-242	13953736bps	7	5865us	397	
+router-187	router-188	18651958bps	5	9317us	530	
+router-187	user-189	1990451bps	50	42635us	57	
+router-187	router-195	14869843bps	6	7571us	423	
+router-187	router-202	10826336bps	9	8982us	308	
+router-187	router-203	18433051bps	5	5590us	524	
+router-187	user-289	2352267bps	42	57735us	67	
+router-188	user-189	1311133bps	76	49007us	38	
+router-188	router-229	12625061bps	7	7110us	359	
+router-188	user-289	1790361bps	55	33502us	51	
+user-193	router-200	1053921bps	94	51105us	30	
+user-193	router-203	2783997bps	35	69776us	80	
+router-195	miner-12	2731432bps	36	42843us	78	
+router-195	router-201	18592928bps	5	9435us	529	
+router-195	router-218	16392161bps	6	9506us	466	
+miner-12	router-203	2386638bps	41	53689us	68	
+user-197	router-202	1410018bps	70	32669us	41	
+user-197	router-203	1210924bps	82	49568us	35	
+user-198	router-213	2209889bps	45	40331us	63	
+user-199	router-213	2484508bps	40	69052us	71	
+router-200	router-213	15464024bps	6	9034us	440	
+router-200	user-291	2334812bps	42	69937us	67	
+router-201	router-202	11210959bps	8	8238us	319	
+router-201	router-203	19237066bps	5	9097us	547	
+router-201	router-210	10664047bps	9	5554us	303	
+router-201	router-212	19675060bps	5	6466us	559	
+router-201	router-213	10477061bps	9	9492us	298	
+router-201	user-291	1594208bps	62	40999us	46	
+router-202	router-217	17116042bps	5	5087us	487	
+router-202	router-218	18859255bps	5	5727us	536	
+router-202	router-255	12262001bps	8	7437us	349	
+router-202	user-291	2242793bps	44	46452us	64	
+router-203	router-218	10283967bps	9	7419us	293	
+router-203	router-255	10248305bps	9	5261us	292	
+user-206	router-213	1522367bps	65	51098us	44	
+router-207	router-212	10207338bps	9	6940us	290	
+router-207	router-214	19246626bps	5	9225us	547	
+router-207	user-220	2789545bps	35	47829us	80	
+router-207	router-222	13465050bps	7	5379us	383	
+router-207	user-294	2882873bps	34	60520us	82	
+router-208	router-212	10194942bps	9	8435us	290	
+router-208	router-213	16597273bps	6	5841us	472	
+router-208	router-214	18081201bps	5	5515us	514	
+router-208	user-220	1390579bps	71	57720us	40	
+router-208	user-221	2402035bps	41	54728us	69	
+router-208	router-222	19174086bps	5	5409us	545	
+router-208	router-295	17571686bps	5	6068us	500	
+router-208	router-301	14166881bps	7	8250us	403	
+router-209	router-210	94573289bps	1	9562us	2687	
+router-209	router-212	76168006bps	1	7652us	2164	
+router-209	router-213	10570257bps	9	9173us	301	
+router-209	router-214	15701771bps	6	5491us	447	
+router-209	router-222	11681424bps	8	5660us	332	
+router-209	router-295	10574671bps	9	5644us	301	
+router-210	router-216	92631960bps	1	8915us	2632	
+router-210	router-219	19480612bps	5	6163us	554	
+router-210	router-222	11186468bps	8	8472us	318	
+router-210	router-306	70756319bps	1	8410us	2011	
+router-212	router-216	61438861bps	1	5275us	1746	
+router-212	router-219	12289097bps	8	6324us	350	
+router-212	router-222	11623073bps	8	8939us	331	
+router-213	router-216	11603929bps	8	9165us	330	
+router-213	router-217	16295215bps	6	7640us	463	
+router-213	router-218	19142477bps	5	9961us	544	
+router-213	router-219	15322942bps	6	8426us	436	
+router-213	user-221	1693441bps	59	19525us	49	
+router-213	router-222	18253998bps	5	8230us	519	
+router-213	router-304	15883736bps	6	7472us	452	
+router-214	router-214	10482753bps	9	5935us	298	
+router-214	user-215	2285420bps	43	17580us	65	
+router-214	router-216	12990304bps	7	6188us	370	
+router-214	router-217	18345251bps	5	6313us	522	
+router-214	router-218	17282332bps	5	6584us	491	
+router-214	user-305	2305595bps	43	33713us	66	
+router-214	router-306	11346840bps	8	6657us	323	
+user-215	router-217	2767978bps	36	66094us	79	
+router-216	router-217	16319008bps	6	7056us	464	
+router-216	router-218	15786441bps	6	5247us	449	
+router-217	router-236	13486771bps	7	6872us	384	
+router-217	user-253	2398456bps	41	12397us	69	
+router-217	user-254	2374060bps	42	19044us	68	
+router-217	router-293	11004156bps	9	8634us	313	
+router-217	router-295	18407355bps	5	6998us	523	
+router-217	router-301	15064435bps	6	8059us	428	
+router-217	user-302	1931445bps	51	19811us	55	
+router-217	router-303	14621131bps	6	8445us	416	
+router-217	router-304	11343339bps	8	8063us	323	
+router-217	router-306	19153312bps	5	8206us	545	
+router-218	router-236	17159221bps	5	6119us	488	
+router-218	router-237	13756133bps	7	8110us	391	
+router-218	user-253	1873303bps	53	21586us	54	
+router-218	router-301	12491950bps	8	8893us	355	
+router-218	router-303	16078397bps	6	9776us	457	
+router-218	router-306	13913317bps	7	8690us	396	
+router-219	user-220	2947012bps	33	11319us	84	
+router-222	user-307	2064360bps	48	17413us	59	
+router-227	user-287	1038973bps	96	36577us	30	
+router-228	router-229	10279498bps	9	5587us	293	
+router-228	user-309	2400101bps	41	47798us	69	
+router-229	user-230	1040788bps	96	49128us	30	
+router-229	user-309	1140234bps	87	37552us	33	
+user-231	router-234	2857795bps	34	33531us	82	
+user-232	router-234	1386857bps	72	60551us	40	
+user-233	router-234	1606952bps	62	29182us	46	
+router-234	router-235	16428625bps	6	7574us	467	
+router-234	router-236	17929889bps	5	5270us	510	
+router-234	router-237	11115518bps	8	5182us	316	
+router-235	router-236	16782059bps	5	5563us	477	
+router-235	router-237	11939056bps	8	8045us	340	
+router-235	user-310	1501655bps	66	36372us	43	
+router-236	user-238	1619645bps	61	34011us	47	
+router-237	user-238	2389997bps	41	28056us	68	
+user-238	router-312	2781089bps	35	35746us	80	
+router-239	user-314	2923795bps	34	25523us	84	
+router-241	router-245	13796158bps	7	8368us	392	
+router-241	router-247	13566024bps	7	8644us	386	
+router-241	router-316	14552063bps	6	6378us	414	
+router-241	router-317	13725057bps	7	5429us	390	
+router-241	router-318	71605399bps	1	7436us	2035	
+router-242	router-243	12762461bps	7	5962us	363	
+router-242	router-244	17044302bps	5	8462us	485	
+router-242	router-245	18985666bps	5	7968us	540	
+router-242	user-246	2221843bps	45	56678us	64	
+router-242	router-247	15559267bps	6	5835us	443	
+router-242	router-316	18929359bps	5	8996us	538	
+router-242	router-317	16988304bps	5	5573us	483	
+router-242	router-318	12542675bps	7	7299us	357	
+router-243	router-245	10320558bps	9	5592us	294	
+router-243	router-247	18678205bps	5	7289us	531	
+router-243	router-318	89146828bps	1	7933us	2533	
+router-244	router-245	13341608bps	7	7353us	380	
+router-244	router-247	18145635bps	5	5932us	516	
+router-244	router-316	15517696bps	6	5059us	441	
+router-244	router-318	16345328bps	6	7481us	465	
+router-244	user-319	1691260bps	59	10959us	49	
+router-245	user-248	2286710bps	43	62678us	65	
+router-247	user-248	1296765bps	77	39366us	37	
+user-252	router-255	1803814bps	55	31529us	52	
+user-254	router-255	1429103bps	69	21368us	41	
+router-257	miner-9	2680811bps	37	47515us	77	
+router-257	router-282	18029832bps	5	8635us	513	
+user-258	router-312	1554815bps	64	13659us	45	
+user-259	router-262	2202455bps	45	24047us	63	
+router-262	miner-14	2934721bps	34	23855us	84	
+user-265	router-275	1989922bps	50	68932us	57	
+router-275	router-276	16983546bps	5	8861us	483	
+router-275	user-278	1067046bps	93	65663us	31	
+router-275	router-279	17977411bps	5	6958us	511	
+router-275	router-282	11784139bps	8	5968us	335	
+router-275	user-283	2071022bps	48	50082us	59	
+router-276	router-279	19296591bps	5	5499us	549	
+router-276	user-281	1501286bps	66	17532us	43	
+router-279	user-280	1516764bps	65	18383us	44	
+router-279	user-281	2329735bps	42	66691us	67	
+user-284	router-285	1126983bps	88	19225us	33	
+user-284	router-317	2841160bps	35	46449us	81	
+router-285	router-316	19586092bps	5	6171us	557	
+router-285	router-317	13615094bps	7	6264us	387	
+user-286	router-317	2215627bps	45	20397us	63	
+router-293	user-300	2536971bps	39	12595us	73	
+router-293	router-301	14159745bps	7	5191us	403	
+router-293	router-303	11355898bps	8	7005us	323	
+router-293	router-304	14510540bps	6	6896us	413	
+router-295	user-299	1306493bps	76	50428us	38	
+router-295	router-303	12506536bps	7	9055us	356	
+router-295	router-304	11817360bps	8	6255us	336	
+router-295	router-306	12701261bps	7	6207us	361	
+router-301	router-304	12353966bps	8	8929us	351	
+router-301	router-306	89135877bps	1	5394us	2533	
+user-302	router-303	1079714bps	92	68744us	31	
+user-302	router-304	2972748bps	33	69064us	85	
+router-303	router-304	19049340bps	5	5030us	542	
+router-304	router-306	18660674bps	5	6337us	531	
+router-304	user-308	1608562bps	62	31798us	46	
+user-310	router-312	1442766bps	69	41487us	41	
+user-311	router-312	2219966bps	45	51771us	64	
+user-313	router-316	2415370bps	41	47592us	69	
+router-316	router-317	19563595bps	5	9600us	556	
+router-167	router-142	73413242bps	1	8806us	2086	
+router-142	router-160	57683390bps	1	9288us	1639	
+router-160	router-243	45654169bps	2	9546us	1297	
+router-161	router-209	55465977bps	1	6080us	1576	
