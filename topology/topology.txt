@@ -1,0 +1,41 @@
+# 
+
+router
+
+# node 	comment	    ypos    xpos
+router1	    NA		2       5
+router2	    NA		2      9
+router3	    NA		2      1
+router4	    NA		5       5
+miner1	    NA		1       7
+miner2	    NA		3      9
+miner3	    NA		3      1
+user1		NA		1       6
+user2		NA		1       4
+user3		NA		1       3
+user4		NA		2      10
+user5		NA		1      9
+user6		NA		2      8
+user7		NA		2      0
+user8		NA		1      1
+user9		NA		2      2
+user0		NA		10	 5
+
+link
+
+router1	router4	1Mbps 1 200ms
+router2	router4	1Mbps 1 200ms
+router3	router4	1Mbps 1 200ms
+router1 miner1	1Mbps 1 200ms
+router1	user1   1Mbps 1 200ms
+router1	user2   1Mbps 1 200ms
+router1	user3   1Mbps 1 200ms
+router2	miner2	1Mbps 1 200ms
+router2	user4   1Mbps 1 200ms
+router2	user5   1Mbps 1 200ms
+router2	user6   1Mbps 1 200ms
+router3	miner3	1Mbps 1 200ms
+router3	user7   1Mbps 1 200ms
+router3	user8   1Mbps 1 200ms
+router3	user9   1Mbps 1 200ms
+router4 user0   1Mbps 1 200ms
