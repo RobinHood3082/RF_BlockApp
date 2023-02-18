@@ -91,7 +91,7 @@ int main(int argc, char *argv[]) {
         // std::cout << "App: " << apps[108]->GetTypeId().GetName() << std::endl;
 
         for (int i = 108; i <= 162; i++) {
-            Simulator::Schedule(Seconds(2), &ndnBlockchainApp::sendInitRequest, apps[i], std::string("user-144"));
+            Simulator::Schedule(Seconds(2.0 + i * 0.035), &ndnBlockchainApp::sendInitRequest, apps[i], std::string("user-144"));
         }
 
         // SCHEDULER END
