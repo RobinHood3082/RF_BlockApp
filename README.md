@@ -1,5 +1,6 @@
 # RF_BlockApp
-Blockchain Application (E-voting) on ndnSIM/ns3 using NDN/UDP using RocketFuel topology
+
+Blockchain-based NDN Applications over RocketFuel Topology using ns3/ndnSIM
 
 Named-Data Network (NDN), also known as "the future internet architecture" is a content-centric network architecture for the next generation of decentralized internet. It is an excellent choice for Blockchain applications due to its in-network caching feature.
 
