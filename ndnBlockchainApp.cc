@@ -315,7 +315,7 @@ void ndnBlockchainApp::OnData(std::shared_ptr<const ndn::Data> data) {
     tmpStream >> dataName; 
 
     if (dataName.back() == 't') {
-        NS_LOG_INFO("Recieved candidates list: " << decodedData);
+        NS_LOG_INFO("Recieved candidates list on <" << nameOfNode << ">: " << decodedData);
         return;
     }
 

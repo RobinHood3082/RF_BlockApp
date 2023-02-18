@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
     CommandLine cmd;
     cmd.Parse(argc, argv);
 
-    int startTime = 0, endTime = 10;
+    int startTime = 0, endTime = 20;
 
     AnnotatedTopologyReader topologyReader("", 25);
     topologyReader.SetFileName("scratch/RF_BlockApp/topology/topology.txt");
@@ -89,7 +89,10 @@ int main(int argc, char *argv[]) {
 
         // SCHEDULER START
         // std::cout << "App: " << apps[108]->GetTypeId().GetName() << std::endl;
-        Simulator::Schedule(Seconds(2), &ndnBlockchainApp::sendInitRequest, apps[108], std::string("user-144"));
+
+        for (int i = 108; i <= 162; i++) {
+            Simulator::Schedule(Seconds(2.0 + i * 0.035), &ndnBlockchainApp::sendInitRequest, apps[i], std::string("user-144"));
+        }
 
         // SCHEDULER END
         Simulator::Run();
