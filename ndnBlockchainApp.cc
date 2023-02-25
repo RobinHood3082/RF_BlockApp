@@ -98,30 +98,13 @@ std::string ndnBlockchainApp::decode_data(std::shared_ptr<const ns3::ndn::Data> 
 }
 
 void ndnBlockchainApp::verifyBlock(int hashVal) { // DONE
-    if (verifyCount[hashVal] > minerList.size() / 2) return;
-
-    // VRIFIED, sppse
-    BBlock& newBlock = blockStore[hashVal];
     verifyCount[hashVal]++;
-
-    // broadcast verification
-    for (auto rcpnt : minerList) {
-        if (rcpnt == nameOfNode) continue;
-
-        std::string prefix = "/ndn.blockchain/" + rcpnt;
-        prefix += "/" + std::to_string(newBlock.hashThis);
-        prefix += "/" + nameOfNode;
-        prefix += "/verify";
-
-        auto newinterest = std::make_shared<ndn::Interest>(prefix);
-        newinterest->setNonce(dist(rng));
-        newinterest->setInterestLifetime(ndn::time::seconds(40000));
-        this->SendInterest(newinterest);
-    }
-
+    BBlock newBlock = blockStore[hashVal];
     if (verifyCount[hashVal] > minerList.size() / 2) {
+        if (addedToBC[hashVal]) return;
         this->addBlock(newBlock);
         this->BroadcastBlockToUsers(newBlock);
+        return;
     }
 }
 
@@ -137,9 +120,17 @@ void ndnBlockchainApp::sendInitRequest(std::string initNode) {
     this->SendInterest(newinterest);
 }
 
-void ndnBlockchainApp::addBlock(const BBlock& newBlock) { // DONE
+void ndnBlockchainApp::addBlock(const BBlock& newBlock) {
+    if (addedToBC[newBlock.hashThis]) return;
+    
+    NS_LOG_INFO("Block " << blockChain.size() << " added to " << nameOfNode << "\'s blockchain");
     blockChain.push_back(newBlock);
     trList.clear();
+    NS_LOG_INFO("Creator: " << newBlock.creator << "\nPreserved Size: " << newBlock.sz
+        << "\nActual Size: " << newBlock.trDest.size() << "\nHashLast: " << newBlock.hashLast
+        << "\nHashThis: " << newBlock.hashThis << "\nProof-of-Work: " << newBlock.pow);
+
+    addedToBC[newBlock.hashThis] = true;
 }
 
 void ndnBlockchainApp::ShowResults() {
@@ -345,8 +336,31 @@ void ndnBlockchainApp::OnData(std::shared_ptr<const ndn::Data> data) {
         newBlock.trDest.push_back(word);
     }
 
+    if (addedToBC[newBlock.hashThis]) return;
+
     blockStore[newBlock.hashThis] = newBlock;
+
+    if (appMode == USER) {
+        addBlock(newBlock);
+        return;
+    }
+
     this->verifyBlock(newBlock.hashThis);
+
+    // broadcast verification
+    for (auto rcpnt : minerList) {
+        if (rcpnt == nameOfNode) continue;
+
+        std::string prefix = "/ndn.blockchain/" + rcpnt;
+        prefix += "/" + std::to_string(newBlock.hashThis);
+        prefix += "/" + nameOfNode;
+        prefix += "/verify";
+
+        auto newinterest = std::make_shared<ndn::Interest>(prefix);
+        newinterest->setNonce(dist(rng));
+        newinterest->setInterestLifetime(ndn::time::seconds(40000));
+        this->SendInterest(newinterest);
+    }
 }
 
 void ndnBlockchainApp::NewBlock() {
@@ -365,8 +379,7 @@ void ndnBlockchainApp::NewBlock() {
         temporaryBlock.trDest.push_back(v);
     }
 
-    trList.clear();
-    blockChain.push_back(temporaryBlock);
+    addBlock(temporaryBlock);
 
     this->BroadcastBlockToMiners(temporaryBlock);
 }

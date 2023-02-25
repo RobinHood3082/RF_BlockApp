@@ -94,17 +94,8 @@ public:
         "user-311"
     };
 
-    std::vector <std::string> votes = {
-        "01 user1 Ash",
-        "02 user2 Ash",
-        "03 user3 Robin",
-        "04 user4 Brock",
-        "05 user5 Brock",
-        "06 user6 Damian",
-        "07 user7 Damian",
-        "08 user8 Damian",
-        "09 user9 Ash"
-    };
+
+    // candidates: Donald Clinton Russel Andrew Smith
 
     // suffix list for interest packet
     /// /vote : new vote
@@ -117,6 +108,7 @@ public:
     BBlock temporaryBlock;
     std::unordered_map <int, BBlock> blockStore;
     std::unordered_map <int, int> verifyCount;
+    std::unordered_map <int, bool> addedToBC;
 
     int CurrentGeneration = 0;
     static TypeId GetTypeId();
@@ -129,6 +121,7 @@ public:
     void NewTransaction(string trxData);
     void NewBlock();
     void ShowResults();
+    void sendInitRequest(std::string initNode);
 
 // private:
     void BroadcastTransaction(string sender, string reciever);
@@ -137,7 +130,6 @@ public:
 
     void verifyBlock(int hashVal);
     void addBlock(const BBlock& newBlock);
-    void sendInitRequest(std::string initNode);
     std::string decode_data(std::shared_ptr<const ndn::Data> data);
     void printNodeName(std::string prompt);
 };
