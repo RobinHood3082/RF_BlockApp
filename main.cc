@@ -11,6 +11,7 @@
 #include "ns3/integer.h"
 
 #include "ndnBlockchainApp.hpp"
+#include "ipBlockchainApp.hpp"
 
 namespace ns3 {
 int
@@ -27,7 +28,7 @@ main (int argc, char *argv[])
 
   NodeContainer allNodes = topologyReader.GetNodes ();
 
-  bool ndn_flag = true;
+  bool ndn_flag = false;
   // change this flag to run on udp
 
   if (ndn_flag)
@@ -134,6 +135,48 @@ main (int argc, char *argv[])
     }
   else
     {
+      auto allLinks = topologyReader.GetLinks ();
+      InternetStackHelper internetHelper;
+      internetHelper.Install (allNodes);
+
+      topologyReader.AssignIpv4Addresses ("10.1.0.0");
+
+      for (int i = 0; i < allNodes.size (); i++)
+        {
+          Ptr<Ipv4> ipv4 = allNodes.Get (i)->GetObject<Ipv4> ();
+          Ipv4InterfaceAddress iaddr = ipv4->GetAddress (1, 0);
+          Ipv4Address ipAddr = iaddr.GetLocal ();
+
+          cout << i << " " << Names::FindName (allNodes.Get (i)) << " " << ipAddr << endl;
+        }
+
+      Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
+      Packet::EnablePrinting ();
+
+      Ptr<ipBlockchainApp> udp = CreateObject<ipBlockchainApp> ();
+
+      udp->SetStartTime (Seconds (0));
+      udp->SetStopTime (Seconds (20));
+
+      Ptr<Ipv4> ipv4 = allNodes.Get (100)->GetObject<Ipv4> ();
+      Ipv4InterfaceAddress iaddr = ipv4->GetAddress (1, 0);
+      Ipv4Address ipAddr = iaddr.GetLocal ();
+      stringstream ss;
+      ss << ipAddr;
+      string ipAddrStr;
+      ss >> ipAddrStr;
+      udp->SetAttribute ("m_thisAddress", StringValue (ipAddrStr));
+
+      allNodes.Get (100)->AddApplication (udp);
+
+      Ipv4Address destIp ("255.255.255.255");
+
+      std::string hello = "hello1";
+      Ptr<Packet> packet1 = Create<Packet> ((uint8_t *) hello.c_str (), hello.size () + 1);
+      Simulator::Schedule (Seconds (20), &ipBlockchainApp::SendPacket, udp, packet1, destIp, 80);
+
+      Simulator::Run ();
+      Simulator::Destroy ();
     }
 
   return 0;
