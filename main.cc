@@ -7,7 +7,6 @@
 #include "ns3/applications-module.h"
 #include "ns3/internet-module.h"
 #include "ns3/csma-module.h"
-#include "bits/stdc++.h"
 #include "ns3/integer.h"
 
 #include "ndnBlockchainApp.hpp"
@@ -28,7 +27,7 @@ main (int argc, char *argv[])
 
   NodeContainer allNodes = topologyReader.GetNodes ();
 
-  bool ndn_flag = false;
+  bool ndn_flag = true;
   // change this flag to run on udp
 
   if (ndn_flag)

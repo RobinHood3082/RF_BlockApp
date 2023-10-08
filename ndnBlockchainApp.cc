@@ -10,7 +10,8 @@
 
 #include "ns3/random-variable-stream.h"
 
-#include "bits/stdc++.h"
+#include <random>
+
 #include "ns3/string.h"
 #include "ns3/integer.h"
 
