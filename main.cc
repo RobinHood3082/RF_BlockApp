@@ -27,7 +27,7 @@ main (int argc, char *argv[])
 
   NodeContainer allNodes = topologyReader.GetNodes ();
 
-  bool ndn_flag = true;
+  bool ndn_flag = false;
   // change this flag to run on udp
 
   if (ndn_flag)
@@ -138,8 +138,9 @@ main (int argc, char *argv[])
       InternetStackHelper internetHelper;
       internetHelper.Install (allNodes);
 
-      topologyReader.AssignIpv4Addresses ("10.1.0.0");
+      topologyReader.AssignIpv4Addresses ("10.0.0.0");
 
+      vector<Ptr<ipBlockchainApp>> apps;
       for (int i = 0; i < allNodes.size (); i++)
         {
           Ptr<Ipv4> ipv4 = allNodes.Get (i)->GetObject<Ipv4> ();
@@ -147,32 +148,50 @@ main (int argc, char *argv[])
           Ipv4Address ipAddr = iaddr.GetLocal ();
 
           cout << i << " " << Names::FindName (allNodes.Get (i)) << " " << ipAddr << endl;
+
+          Ptr<ipBlockchainApp> udp = CreateObject<ipBlockchainApp> ();
+          udp->SetStartTime (Seconds (startTime));
+          udp->SetStopTime (Seconds (endTime));
+          udp->SetAttribute ("NodeName", StringValue (Names::FindName (allNodes.Get (i))));
+
+          stringstream ss;
+          ss << ipAddr;
+          string ipAddrStr;
+          ss >> ipAddrStr;
+          udp->SetAttribute ("m_thisAddress", StringValue (ipAddrStr));
+
+          allNodes.Get (i)->AddApplication (udp);
+          apps.push_back (udp);
         }
 
       Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
       Packet::EnablePrinting ();
 
-      Ptr<ipBlockchainApp> udp = CreateObject<ipBlockchainApp> ();
+      // Ptr<ipBlockchainApp> udp = CreateObject<ipBlockchainApp> ();
 
-      udp->SetStartTime (Seconds (0));
-      udp->SetStopTime (Seconds (20));
+      // udp->SetStartTime (Seconds (0));
+      // udp->SetStopTime (Seconds (20));
 
-      Ptr<Ipv4> ipv4 = allNodes.Get (100)->GetObject<Ipv4> ();
-      Ipv4InterfaceAddress iaddr = ipv4->GetAddress (1, 0);
-      Ipv4Address ipAddr = iaddr.GetLocal ();
-      stringstream ss;
-      ss << ipAddr;
-      string ipAddrStr;
-      ss >> ipAddrStr;
-      udp->SetAttribute ("m_thisAddress", StringValue (ipAddrStr));
+      // Ptr<Ipv4> ipv4 = allNodes.Get (100)->GetObject<Ipv4> ();
+      // Ipv4InterfaceAddress iaddr = ipv4->GetAddress (1, 0);
+      // Ipv4Address ipAddr = iaddr.GetLocal ();
+      // stringstream ss;
+      // ss << ipAddr;
+      // string ipAddrStr;
+      // ss >> ipAddrStr;
+      // udp->SetAttribute ("m_thisAddress", StringValue (ipAddrStr));
 
-      allNodes.Get (100)->AddApplication (udp);
+      // allNodes.Get (100)->AddApplication (udp);
 
-      Ipv4Address destIp ("255.255.255.255");
+      // Ipv4Address destIp ("10.1.17.2");
 
-      std::string hello = "hello1";
-      Ptr<Packet> packet1 = Create<Packet> ((uint8_t *) hello.c_str (), hello.size () + 1);
-      Simulator::Schedule (Seconds (20), &ipBlockchainApp::SendPacket, udp, packet1, destIp, 80);
+      Simulator::Schedule (Seconds (20), &ipBlockchainApp::NewTransaction, apps[5],
+                           std::string ("user-145 Donald"));
+
+      // std::string hello = "hello1";
+      // Ptr<Packet> packet1 = Create<Packet> ((uint8_t *) hello.c_str (), hello.size () + 1);
+      // Simulator::Schedule (Seconds (20), &ipBlockchainApp::SendPacket, apps[100], packet1, destIp,
+      //                      80);
 
       Simulator::Run ();
       Simulator::Destroy ();

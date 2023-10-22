@@ -1,4 +1,3 @@
-
 #include "ns3/core-module.h"
 #include "ns3/network-module.h"
 #include "ns3/internet-module.h"
@@ -18,6 +17,8 @@ ipBlockchainApp::GetTypeId ()
       TypeId ("ns3::ipBlockchainApp")
           .AddConstructor<ipBlockchainApp> ()
           .SetParent<Application> ()
+          .AddAttribute ("NodeName", "Name of the Node", StringValue ("/"),
+                         MakeStringAccessor (&ipBlockchainApp::nameOfNode), MakeStringChecker ())
           .AddAttribute ("m_thisAddress", "IPv4 address of itself", ObjectVectorValue (),
                          MakeStringAccessor (&ipBlockchainApp::m_thisAddress),
                          MakeStringChecker ());
@@ -51,12 +52,7 @@ ipBlockchainApp::SetupRecieveSocket (Ptr<Socket> socket, uint16_t port)
 void
 ipBlockchainApp::StartApplication ()
 {
-  NS_LOG_INFO (m_thisAddress << " started application");
-
-  m_responseString["hello1"] = "hello2";
-  m_responseString["hello2"] = "how are you";
-  m_responseString["how are you"] = "I am fine, and you?";
-  m_responseString["I am fine, and you?"] = "I am great to be run in ns3!";
+  cout << nameOfNode << " started application" << endl;
 
   TypeId tid = TypeId::LookupByName ("ns3::UdpSocketFactory");
   m_recvSocket = Socket::CreateSocket (GetNode (), tid);
@@ -64,8 +60,10 @@ ipBlockchainApp::StartApplication ()
   SetupRecieveSocket (m_recvSocket, m_port);
 
   m_recvSocket->SetRecvCallback (MakeCallback (&ipBlockchainApp::OnPacket, this));
+  m_recvSocket->SetAllowBroadcast (true);
 
   m_sendSocket = Socket::CreateSocket (GetNode (), tid);
+  m_sendSocket->SetAllowBroadcast (true);
 }
 
 void
@@ -77,72 +75,95 @@ void
 ipBlockchainApp::OnPacket (Ptr<Socket> socket)
 {
   NS_LOG_FUNCTION (this << socket);
-  NS_LOG_INFO (m_thisAddress << " recieved a packet!");
+  NS_LOG_DEBUG (m_thisAddress << ": Recieved a packet!");
+  cout << m_thisAddress << " recieved a packet!" << endl;
   Ptr<Packet> packet;
   Address from, localAddress;
 
-  if (packet = socket->RecvFrom (from))
-    {
-      // std::string recvdStr = packet->ToString();
-      Ipv4Header ipHeader;
-      packet->RemoveHeader (ipHeader);
+  // if (packet = socket->RecvFrom (from))
+  //   {
+  //     // std::string recvdStr = packet->ToString();
+  //     Ipv4Header ipHeader;
+  //     packet->RemoveHeader (ipHeader);
 
-      uint8_t buffer[packet->GetSize ()];
-      int len = packet->CopyData (buffer, packet->GetSize ());
-      std::string recvdStr (buffer, buffer + packet->GetSize () - 1);
+  //     uint8_t buffer[packet->GetSize ()];
+  //     int len = packet->CopyData (buffer, packet->GetSize ());
+  //     std::string recvdStr (buffer, buffer + packet->GetSize () - 1);
 
-      NS_LOG_INFO ("Received a Packet: \"" << recvdStr << "\" at time " << Now ().GetSeconds ()
-                                           << " on " << m_thisAddress);
+  //     NS_LOG_INFO ("Received a Packet: \"" << recvdStr << "\" at time " << Now ().GetSeconds ()
+  //                                          << " on " << m_thisAddress);
 
-      if (recvdStr == "")
-        return;
+  //     if (recvdStr == "")
+  //       return;
 
-      std::string sendStr = m_responseString[recvdStr];
+  //     std::string sendStr = m_responseString[recvdStr];
 
-      Ptr<Packet> sendPacket = Create<Packet> ((uint8_t *) sendStr.c_str (), sendStr.size () + 1);
+  //     Ptr<Packet> sendPacket = Create<Packet> ((uint8_t *) sendStr.c_str (), sendStr.size () + 1);
 
-      SendPacket (sendPacket, ipHeader.GetSource (), 80);
+  //     SendPacket (sendPacket, ipHeader.GetSource (), 80);
 
-      // PppHeader PppHeader;
-      // copy->RemoveHeader(PppHeader);
+  //     // PppHeader PppHeader;
+  //     // copy->RemoveHeader(PppHeader);
 
-      // // Ipv4Address dest =
-      // std::cout << "Recieved from ";
-      // ipHeader.GetSource().Print(std::cout);
-      // std::cout << std::endl;
-      // ipHeader.GetDestination().Print(std::cout);
-      // std::cout << std::endl;
+  //     // // Ipv4Address dest =
+  //     // std::cout << "Recieved from ";
+  //     // ipHeader.GetSource().Print(std::cout);
+  //     // std::cout << std::endl;
+  //     // ipHeader.GetDestination().Print(std::cout);
+  //     // std::cout << std::endl;
 
-      // NS_LOG_DEBUG(sendStr);
-      // if (recvdStr == "hello1") {
-      //     Ipv4Address dest("10.1.1.1");
-      //     SendPacket(sendPacket, dest, 80);
-      // }
-    }
+  //     // NS_LOG_DEBUG(sendStr);
+  //     // if (recvdStr == "hello1") {
+  //     //     Ipv4Address dest("10.1.1.1");
+  //     //     SendPacket(sendPacket, dest, 80);
+  //     // }
+  //   }
 }
 
 void
 ipBlockchainApp::SendPacket (Ptr<Packet> packet, Ipv4Address destination, uint16_t port)
 {
-  NS_LOG_INFO (m_thisAddress << ": Sending data to " << destination << " on port " << port);
+  cout << m_thisAddress << ": Sending data to " << destination << " on port " << port << endl;
 
   Ipv4Header ipHeader;
-  ipHeader.SetSource (Ipv4Address (m_thisAddress.c_str ()));
-  ipHeader.SetDestination (destination);
-  packet->AddHeader (ipHeader);
+  uint8_t buffer[packet->GetSize ()];
+  int len = packet->CopyData (buffer, packet->GetSize ());
+  std::string recvdStr (buffer, buffer + packet->GetSize () - 1);
 
-  // ipHeader.GetSource().Print(std::cout);
-  // std::cout << " ";
-  // ipHeader.GetDestination().Print(std::cout);
-  // std::cout << std::endl;
-
-  // uint8_t buffer[packet->GetSize()];
-  //     int len = packet->CopyData(buffer, packet->GetSize());
-  //     std::string recvdStr(buffer, buffer + packet->GetSize()-1);
-
-  // NS_LOG_INFO("Sending " << recvdStr);
+  NS_LOG_INFO ("Sending " << recvdStr);
 
   NS_LOG_FUNCTION (this << packet << destination << port);
   m_sendSocket->Connect (InetSocketAddress (destination, port));
   m_sendSocket->Send (packet);
+}
+
+void
+ipBlockchainApp::NewTransaction (string trxData)
+{
+  istringstream is (trxData);
+  string user, rcpnt;
+
+  is >> user;
+  is >> rcpnt;
+
+  this->BroadcastTransaction (user, rcpnt);
+
+  cout << "Transaction created by " << nameOfNode << endl;
+}
+
+void
+ipBlockchainApp::BroadcastTransaction (string sender, string reciever)
+{
+  string trxData = "/udp.blockchain/" + reciever;
+  trxData += "/" + nameOfNode;
+  trxData += "/vote";
+
+  cout << "Broadcasting transaction: " << trxData << endl;
+
+  Ptr<Ipv4> ipv4 = GetNode ()->GetObject<Ipv4> ();
+  Ipv4InterfaceAddress iaddr = ipv4->GetAddress (1, 0);
+  Ipv4Address broadcastAddress = iaddr.GetBroadcast ();
+
+  Ptr<Packet> sendPacket = Create<Packet> ((uint8_t *) trxData.c_str (), trxData.size () + 1);
+  SendPacket (sendPacket, broadcastAddress, 80);
 }
