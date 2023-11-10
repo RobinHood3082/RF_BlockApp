@@ -59,6 +59,8 @@ public:
   std::unordered_map<int, int> verifyCount;
   std::unordered_map<int, bool> addedToBC;
 
+  NodeContainer allNodes;
+
   virtual void StartApplication ();
   virtual void StopApplication ();
 
@@ -68,6 +70,7 @@ public:
   void NewBlock ();
   void ShowResults ();
   void sendInitRequest (std::string initNode);
+  void SetNodeContainer (NodeContainer nodes);
 
   // private:
   void BroadcastTransaction (string sender, string reciever);

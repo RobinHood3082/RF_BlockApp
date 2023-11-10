@@ -4,6 +4,7 @@
 #include "ns3/point-to-point-module.h"
 #include "ns3/applications-module.h"
 #include "ipBlockchainApp.hpp"
+#include "globalNodeContainer.hpp"
 
 using namespace ns3;
 
@@ -24,6 +25,12 @@ ipBlockchainApp::GetTypeId ()
                          MakeStringChecker ());
 
   return tid;
+}
+
+void
+ipBlockchainApp::SetNodeContainer (NodeContainer nodes)
+{
+  allNodes = nodes;
 }
 
 TypeId
@@ -125,7 +132,6 @@ ipBlockchainApp::SendPacket (Ptr<Packet> packet, Ipv4Address destination, uint16
 {
   cout << m_thisAddress << ": Sending data to " << destination << " on port " << port << endl;
 
-  Ipv4Header ipHeader;
   uint8_t buffer[packet->GetSize ()];
   int len = packet->CopyData (buffer, packet->GetSize ());
   std::string recvdStr (buffer, buffer + packet->GetSize () - 1);
@@ -160,10 +166,25 @@ ipBlockchainApp::BroadcastTransaction (string sender, string reciever)
 
   cout << "Broadcasting transaction: " << trxData << endl;
 
-  Ptr<Ipv4> ipv4 = GetNode ()->GetObject<Ipv4> ();
-  Ipv4InterfaceAddress iaddr = ipv4->GetAddress (1, 0);
-  Ipv4Address broadcastAddress = iaddr.GetBroadcast ();
-
   Ptr<Packet> sendPacket = Create<Packet> ((uint8_t *) trxData.c_str (), trxData.size () + 1);
-  SendPacket (sendPacket, broadcastAddress, 80);
+
+  NS_LOG_DEBUG ("Size is: " << allNodesContainer.size ());
+
+  // for (auto it = allNodes.begin (); it != allNodes.end (); it++)
+  //   {
+  //     Ptr<Node> node = *it;
+  //     Ptr<Ipv4> ipv4 = node->GetObject<Ipv4> ();
+  //     Ipv4InterfaceAddress iaddr = ipv4->GetAddress (1, 0);
+  //     Ipv4Address ipAddr = iaddr.GetLocal ();
+
+  //     NS_LOG_DEBUG (ipAddr);
+
+  //     // if (Names::FindName (node)[0] == 'r')
+  //     //   continue;
+
+  //     // if (Names::FindName (node) == nameOfNode)
+  //     //   continue;
+
+  //     this->SendPacket (sendPacket, ipAddr, 80);
+  //   }
 }

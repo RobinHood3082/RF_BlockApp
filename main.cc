@@ -26,6 +26,7 @@ main (int argc, char *argv[])
   topologyReader.Read ();
 
   NodeContainer allNodes = topologyReader.GetNodes ();
+  cout << "Number of Nodes: " << allNodes.size () << endl;
 
   bool ndn_flag = false;
   // change this flag to run on udp
@@ -143,21 +144,28 @@ main (int argc, char *argv[])
       vector<Ptr<ipBlockchainApp>> apps;
       for (int i = 0; i < allNodes.size (); i++)
         {
-          Ptr<Ipv4> ipv4 = allNodes.Get (i)->GetObject<Ipv4> ();
+          Ptr<Node> node = allNodes.Get (i);
+          std::string nodeName = Names::FindName (node);
+
+          Ptr<Ipv4> ipv4 = node->GetObject<Ipv4> ();
           Ipv4InterfaceAddress iaddr = ipv4->GetAddress (1, 0);
           Ipv4Address ipAddr = iaddr.GetLocal ();
 
-          cout << i << " " << Names::FindName (allNodes.Get (i)) << " " << ipAddr << endl;
+          cout << i << " " << nodeName << " " << ipAddr << endl;
+
+          if (nodeName[0] == 'r')
+            continue;
 
           Ptr<ipBlockchainApp> udp = CreateObject<ipBlockchainApp> ();
           udp->SetStartTime (Seconds (startTime));
           udp->SetStopTime (Seconds (endTime));
-          udp->SetAttribute ("NodeName", StringValue (Names::FindName (allNodes.Get (i))));
+          udp->SetAttribute ("NodeName", StringValue (nodeName));
 
           stringstream ss;
           ss << ipAddr;
           string ipAddrStr;
           ss >> ipAddrStr;
+
           udp->SetAttribute ("m_thisAddress", StringValue (ipAddrStr));
 
           allNodes.Get (i)->AddApplication (udp);
@@ -185,7 +193,7 @@ main (int argc, char *argv[])
 
       // Ipv4Address destIp ("10.1.17.2");
 
-      Simulator::Schedule (Seconds (20), &ipBlockchainApp::NewTransaction, apps[5],
+      Simulator::Schedule (Seconds (20), &ipBlockchainApp::NewTransaction, apps[108],
                            std::string ("user-145 Donald"));
 
       // std::string hello = "hello1";
